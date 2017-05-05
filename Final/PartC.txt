@@ -1,0 +1,13 @@
+Part C: 1) In software engineering, the acronym SOLID is a mnemonic for remembering the first five principles:
+SRP – the Single Responsibility Principle
+OCP – the Open/Closed Principle
+LSP – the Liskov Substitution Principled
+ISP – the Interface Segregation Principle
+DIP – the Dependency Inversion Principle
+
+
+SRP - If your class is responsible for more than one thing you should split it into seperate tasks. For example if you had a class that searched through and loaded a bunch of strings from files and then formatted them nicely and printed them as requested you could split it into an input class and an output class, or possibly even input, choose, and output classes.
+
+OCP - Software should be "open for extension and closed for modification", meaning you should be able to add new functionality without having to change what is already made. Doing this is greatly aided by the SRP as things become loosely coupled the more they are seperated. 
+
+ISP - This one pertains to combining modules. If you run into the situation where you have created some module that has many unneeded methods, say by deriving from some base class, than the parent module is probably not following the SRP and should be split into seperate modules.

@@ -1,0 +1,56 @@
+Part B: Write a summary of the design patterns we covered in class. The point of this is for it to be something you can look back on later to remind yourself about the various ideas we covered, so I'm leaving it mostly up to you exactly what format you wish to use and how much detail you want to go into.
+
+
+CRTP
+	Curiously Recurring Template Pattern. This is a neat trick to deal with the need for clone functions, for lack
+	of constructing Base * of Derived class. You store the class type of the derived class in the base class. 
+	Base<Derived> With this you can write a single clone function that will call the constructor of any derived class
+	static_cast<T*>(this)->clone();
+
+Singleton
+	We didn't really cover this in class but we encountered it in my GFX project. It is when a class can only 
+	have one instantiation. It can be global so it can be referenced from other scopes without being copied. 
+	SourceMaker says for "Lazy Initialization", which is a cool term, meaning it would only be initialized if 
+	one wasn't already initialized.
+
+Adapter
+	Create a wrapper/interface class to make it possible for similar objects to use the same methods, or eachothers.
+
+Visitor
+	You can add new operations to an Element class without changing it and share those operations between similar classes by making them implement an accept(visitor) function. The visitor class in turn implements 
+	visit(element) to be able to delegate operations for different element types.
+
+Interpreter
+	Use polymorphism to collapse terminal and compound expressions into an abstract language that can be used by the
+	client. In our CPS program the terminals were the basic shapes, the compounds were the compound shapes, and the 
+	abstract language was postscript. The grammar was the structure, shapes into compound shapes. Or in my example 
+	extremely inefficiently stored textures.
+
+Chain of Responsibility
+	This is what I picked for part A. You add objects to a pipeline to be operated on as needed. This is done by making them a linked list. The base has a virtual handle function that just does next->handle(); The derived classes are handlers that do something different if applicable, or revert to base::handle(); My example didn't really pass an object in, but you can imagine if there were multiple different operations you needed to do on an object depending on some attribute of the object you can just drop it in the root handler and it will fall through handlers until one applies and doesn't call base::handle(); You should also probably have some kind of method if none of the handlers apply and no operation was done, depending on the situation.
+
+Composite
+	This is making objects of a tree structure by being able to add children as a leaf or a compound. This is done 
+	by making all objects derived classes of a base type so they can store base * children. Think directories. Our final project uses this a lot, for example the Xamarin.Forms View objects take the objects 
+	they display as children, and some of those children can have descendants. This is also how page 
+	navigation is done, to go back you pop current child view to go back up a level. 
+
+Facade 
+	This is just cleaning up messy classa.classb.getclassc().getsomething() calls. You can put these together
+	in some interface where whatever somethings you need can be accessed directly. interfaceclass.getsomething();
+
+Observer
+	If you need to know a lot of things about some subject class in a bunch of different observer classes whose behavior somehow depends on changes in the subject, rather than polling all values that may change in subject every iteration add an addObserver(observer) function to the subject class, and add an update() function to the observer classes. Then the all the same stuff needed to be done in all the observers can be called from the subject by for(auto observer in observers) observer.update(); This could for instance only be called if subject changed in some specific way the observers needed it to.
+
+Proxy
+	I may have mixed this and Facade up a bit, but they seem similar. This creates an interface to simplify interaction with some common task. In CPS we had a file output class, this was a proxy to all the file output stuff.
+
+Command
+	You have objects and you want to do things on them from a single interface, then make them derivations of some base class with a virtual execute() this will allow more derivations to be added later. This was the home control example from class.
+
+State
+	A state machine, like GLUT. The good OO example was shown in class with the MP3 player. A limited amount of function calls can lead to very complex behavior if those function calls do different thing depending on the state. The state machine holds a state and has limited commands. The states are friends of the state machine class so they can call its limited functions in different ways depending on themselves. The states can also be passed this from the state machine so they know their context.
+
+
+
+

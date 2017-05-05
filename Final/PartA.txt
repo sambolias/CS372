@@ -1,0 +1,13 @@
+Part A: write a well written, clean code example of one of two Design Patterns. You may implement Proxy or Chain of Responsibility
+
+
+I chose the Chain of Responsibility Design Pattern, and I was struggling to find an easy example of an object
+that would need to be passed down a pipeline of possible handlers, so this may be a bit of a stretch, but 
+different time intervals affect a clock in different ways. I think it fits well enough, and I did use an
+example from the link below as a guide.
+
+https://sourcemaking.com/design_patterns/chain_of_responsibility/cpp/1
+
+The code is understandable, and pretty neat, with the exception of the global handlers. My comments are
+descriptive so I won't get into it here. The thing I like most about this program is that in adjusting the constant that represents nanoseconds per iteration you are actually timing your machine. Mine takes an average of 4.3 nanoseconds per iteration, which fits well with the timing we did on simple programs in assembly class.
+Pretty cool how the Chain of Responsibility works too, you just pass it on and it does the work. 
