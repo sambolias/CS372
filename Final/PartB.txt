@@ -40,7 +40,7 @@ Facade
 	in some interface where whatever somethings you need can be accessed directly. interfaceclass.getsomething();
 
 Observer
-	If you need to know a lot of things about some subject class in a bunch of different observer classes whose behavior somehow depends on changes in the subject, rather than polling all values that may change in subject every iteration add an addObserver(observer) function to the subject class, and add an update() function to the observer classes. Then the all the same stuff needed to be done in all the observers can be called from the subject by for(auto observer in observers) observer.update(); This could for instance only be called if subject changed in some specific way the observers needed it to.
+	If you need to know a lot of things about some subject class in a bunch of different observer classes whose behavior somehow depends on changes in the subject, rather than polling all values that may change in subject every iteration add an addObserver(observer) function to the subject class, and add an update() function to the observer classes. Then the all the same stuff needed to be done in all the observers can be called from the subject by for(auto observer in observers) observer.update(); This could for instance only be called if subject changed in some specific way the observers needed it to. A good example of this is the TapRecognizer() I used for the calendar of TaskIt. It represents an observer that is added to the Labels that represent the days on the calendar and the update function is the lambda function defined for the Tap Action. In this way the ContentPage can add observers to all it's interactive children, the same type of thing is used for button objects.
 
 Proxy
 	I may have mixed this and Facade up a bit, but they seem similar. This creates an interface to simplify interaction with some common task. In CPS we had a file output class, this was a proxy to all the file output stuff.
@@ -51,6 +51,14 @@ Command
 State
 	A state machine, like GLUT. The good OO example was shown in class with the MP3 player. A limited amount of function calls can lead to very complex behavior if those function calls do different thing depending on the state. The state machine holds a state and has limited commands. The states are friends of the state machine class so they can call its limited functions in different ways depending on themselves. The states can also be passed this from the state machine so they know their context.
 
+Decorator
+	This is like visitor but for some behavior. The class that you want to decorate can hold base * decorator members which it interacts with in a defined way. That way derived decorators can be written in a way that change the behavior of the class they are decorating without changing the class itself. 
 
+Null Object 
+	This is just a do nothing object, but it exists so it can be loaded in an interface with used objects and just does nothing. An easy example of this would be making a purely virtual base class into a null object by declaring its deleted functions and just leaving them empty. 
 
+Template
+	Template Method is basically just using a purely virtual base class as the skeleton for derived classes that will implement the purely virtual functions. It allows the reuse of a certain amount of functionality provided by the base class to be used in derived classes that only are slightly different than eachother. This is kind of the cornerstone of polymorphism.
 
+Strategy
+	This is another cornerstone of polymorphism. If you are interacting in a similar way with different objects then make them all derivations of some base class with that interaction virtually defined. Then your interface can use all those derived objects and call their virtual functions without the need to write a way to specifically interact with each different type in the interface.
